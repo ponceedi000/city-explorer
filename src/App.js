@@ -2,6 +2,7 @@ import { Component } from 'react';
 import axios from 'axios';
 import Header from './Componenents/Header.js'
 import Footer from './Componenents/Footer.js'
+// import Map from './Componenents/Map.js'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container'
 import Form from 'react-bootstrap/Form'
@@ -21,16 +22,14 @@ class App extends Component {
 
   getLocation = async (event) => {
     event.preventDefault();
-
     const url = `https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_CITY_KEY}&q=${this.state.searchQuery}&format=json`;
-
     try {
       const response = await axios.get(url);
-      console.log(response)
       const location = response.data[0];
 
       this.setState({
         location,
+        // map,
         error: false,
       });
 
@@ -38,12 +37,20 @@ class App extends Component {
       console.error('Unable to find city', this.state.searchQuery);
       this.setState({ error: true });
     }
+
+    const mapUrl = `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_CITY_KEY}&center=${this.state.location.lat},${this.state.location.lon}&zoom=15&size=500x500&format=jpeg`
+
+    const responseTwo = await axios.get(mapUrl) 
+    const map = responseTwo.config.url;
+    this.setState({
+      map,
+    })
   }
+
+
 
   render() {
     return (
-
-
       <>
         <Header />
         <Container fluid>
@@ -62,7 +69,6 @@ class App extends Component {
             </Row>
           </Form>
 
-
           <Row className="justify-content-md-center">
             <Col>
               {this.state.location.place_id &&
@@ -74,21 +80,18 @@ class App extends Component {
                 <h3> Latitude: {this.state.location.lat}  |  Longitude: {this.state.location.lon}</h3>
               }
             </Col>
+            <Col>
+              {this.state.location.place_id &&
+                <img src={this.state.map} alt="Map" />
+              }
+            </Col>
 
             {
               this.state.error && <h3>Please enter a city (make sure you're spelling it correctly)</h3>
             }
-
           </Row>
-
-
-
         </Container>
-
         <Footer />
-
-
-
       </>
 
 
