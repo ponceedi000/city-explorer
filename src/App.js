@@ -1,11 +1,10 @@
 import { Component } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 // import './App.css'
 import Header from './Componenents/Header.js'
 import Footer from './Componenents/Footer.js'
+import Main from './Componenents/Main.js'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Map from './Componenents/Map.js'
-
 
 class App extends Component {
 
@@ -13,7 +12,7 @@ class App extends Component {
     return (
       <>
         <Header />
-        <Map />
+        <Main />
         <Footer />
       </>
     )
