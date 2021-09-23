@@ -64,7 +64,7 @@ class Main extends Component {
     // console.log(this.state.searchQuery);
 
     try {
-      const weatherUrl = `http://localhost:3001/weather?searchQuery=${this.state.searchQuery}&lon=${this.state.location.lon}&lat=${this.state.location.lat}`
+      const weatherUrl = `https://api.weatherbit.io/v2.0/${this.state.searchQuery}?lat=${this.state.location.lat}&lon=${this.state.location.lon}&${process.env.REACT_APP_WEATHER_KEY}&include=minutely`
       const daWeather = await axios.get(weatherUrl);
       // console.log(daWeather.data);
       // let weatherArray = daWeather.data;
