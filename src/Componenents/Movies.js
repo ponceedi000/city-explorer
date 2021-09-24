@@ -30,9 +30,6 @@ class Movie extends Component {
     </Card>
     </CardGroup>
 
-
-
-
     );
   }
 }
