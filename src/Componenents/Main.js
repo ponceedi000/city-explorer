@@ -3,9 +3,9 @@ import axios from 'axios';
 // import './App.css'
 import Weather from './Weather.js'
 import Movies from './Movies.js'
-import Error from './Error.js'
+//import Error from './Error.js'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Form, Button, Card, Container } from 'react-bootstrap';
+import { Form, Button, Container } from 'react-bootstrap';
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
