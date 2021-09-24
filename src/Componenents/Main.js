@@ -17,9 +17,9 @@ class Main extends Component {
       location: {},
       error: false,
       weatherData: [],
-      movieData: {},
+      movieData: [],
       displayMovies: false,
-      errorMessage: ''
+      errorMessage: '',
     }
   }
 
@@ -36,6 +36,7 @@ class Main extends Component {
         error: false,
       });
       this.getForecast();
+      this.getMovies();
 
     } catch (error) {
       console.error('Unable to find city', this.state.searchQuery);
@@ -83,11 +84,8 @@ class Main extends Component {
 
       const movieData = await axios.get(movieUrl);
 
-      // let movieArray = theMovies.data.results.map(movie => {
-      //   return movie;
-      // });
       this.setState({
-        movieData: movieData,
+        movieData: movieData.data,
         displayMovies: true,
       });
     } catch (err) {
@@ -99,9 +97,8 @@ class Main extends Component {
   };
 
 
-
   render() {
-    console.log(this.state.weatherData);
+    console.log(this.state.movieData);
     return (
       <>
         <Container fluid>
@@ -141,17 +138,14 @@ class Main extends Component {
             <Col>
               {this.state.weatherData.map(weather => (
                 <Weather weather={weather} />
-                // <p> {weather.date}</p>
               ))}
             </Col>
-            <Card.Body>
-              {this.state.displayMovies ?
-                <Movies data={this.state.movieData} /> :
-                <Error
-                  errorMessage={this.state.errorMessage} />}</Card.Body>
-
+            <Col>
+              {this.state.movieData.slice(0, 5).map(movie => (
+                <Movies movie={movie} />
+              ))}
+            </Col>
           </Row>
-
           <Col>
             {
               this.state.error && <h3>Please enter a city (make sure you're spelling it correctly)</h3>
