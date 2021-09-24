@@ -77,7 +77,7 @@ class Main extends Component {
 
     try {
       // This URL is the path to my remote server
-      const weatherUrl = `https://city-explorer-eddie.herokuapp.com/movies?searchQuery=${this.state.searchQuery}`
+      const movieUrl = `https://city-explorer-eddie.herokuapp.com/movies?searchQuery=${this.state.searchQuery}`
       // This URL is the path to my local server
       //const movieUrl = `http://localhost:3001/movies?searchQuery=${this.state.searchQuery}`
 
