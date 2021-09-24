@@ -56,9 +56,9 @@ class Main extends Component {
 
     try {
       // This URL is the path to my remote server
-      // const weatherUrl = `https://city-explorer-eddie.herokuapp.com/weather?searchQuery=${this.state.searchQuery}&lon=${this.state.location.lon}&lat=${this.state.location.lat}`
+      const weatherUrl = `https://city-explorer-eddie.herokuapp.com/weather?searchQuery=${this.state.searchQuery}&lon=${this.state.location.lon}&lat=${this.state.location.lat}`
       // This URL is the path to my local server
-      const weatherUrl = `http://localhost:3001/weather?lon=${this.state.location.lon}&lat=${this.state.location.lat}`
+      //const weatherUrl = `http://localhost:3001/weather?lon=${this.state.location.lon}&lat=${this.state.location.lat}`
 
       const theWeather = await axios.get(weatherUrl);
 
@@ -77,9 +77,9 @@ class Main extends Component {
 
     try {
       // This URL is the path to my remote server
-      // const weatherUrl = `https://city-explorer-eddie.herokuapp.com/movies?searchQuery=${this.state.searchQuery}`
+      const weatherUrl = `https://city-explorer-eddie.herokuapp.com/movies?searchQuery=${this.state.searchQuery}`
       // This URL is the path to my local server
-      const movieUrl = `http://localhost:3001/movies?searchQuery=${this.state.searchQuery}`
+      //const movieUrl = `http://localhost:3001/movies?searchQuery=${this.state.searchQuery}`
 
       const movieData = await axios.get(movieUrl);
 
