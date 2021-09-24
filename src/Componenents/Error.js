@@ -5,7 +5,7 @@ class Error extends Component {
 
   render(){
     return(
-      <Alert variant="danger">{this.props.errorMessage}</Alert>
+      <Alert variant="danger">{this.props.errorMessage}ERROR MESSAGE HERE</Alert>
     );
   }
 }
