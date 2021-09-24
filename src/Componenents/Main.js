@@ -2,10 +2,10 @@ import { Component } from 'react';
 import axios from 'axios';
 // import './App.css'
 import Weather from './Weather.js'
+import Movies from './Movies.js'
+import Error from './Error.js'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Container from 'react-bootstrap/Container'
-import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
+import { Form, Button, Card, Container } from 'react-bootstrap';
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
@@ -17,7 +17,9 @@ class Main extends Component {
       location: {},
       error: false,
       weatherData: [],
-      movie: {}
+      movieData: {},
+      displayMovies: false,
+      errorMessage: ''
     }
   }
 
@@ -46,30 +48,21 @@ class Main extends Component {
     this.setState({
       map,
     })
-
-    // // const weatherUrl = `${process.env.REACT_APP_WEATHER_URL}weather?searchQuery=${this.state.searchQuery}&lon=${this.state.location.lon}&lat=${this.state.location.lat}`
-    // //const weatherUrl = `https://api.weatherbit.io/v2.0/${this.state.searchQuery}?lat=${this.state.location.lat}&lon=${this.state.location.lon}&${process.env.REACT_APP_WEATHER_KEY}&include=minutely`
-    // const weatherUrl = `http://localhost:3001/weather?searchQuery=${this.state.searchQuery}&lon=${this.state.location.lon}&lat=${this.state.location.lat}`
-    // console.log(weatherUrl)
-    // const responseThree = await axios.get(weatherUrl)
-    // const weather = responseThree.data.city_name;
-    // this.setState({
-    //   weather,
-    // })
   }
 
 
 
   getForecast = async () => {
-    // console.log(this.state.searchQuery);
 
     try {
-      const weatherUrl = `http://localhost:3001/weather?searchQuery=${this.state.searchQuery}&lon=${this.state.location.lon}&lat=${this.state.location.lat}`
-      const daWeather = await axios.get(weatherUrl);
-      // console.log(daWeather.data);
-      // let weatherArray = daWeather.data;
-      // console.log(weatherArray);
-      let weatherArray = daWeather.data.map(weather => {
+      // This URL is the path to my remote server
+      const weatherUrl = `https://city-explorer-eddie.herokuapp.com/weather?searchQuery=${this.state.searchQuery}&lon=${this.state.location.lon}&lat=${this.state.location.lat}`
+      // This URL is the path to my local server
+      //const weatherUrl = `http://localhost:3001/weather?lon=${this.state.location.lon}&lat=${this.state.location.lat}`
+
+      const theWeather = await axios.get(weatherUrl);
+
+      let weatherArray = theWeather.data.map(weather => {
         return weather;
       });
       this.setState({
@@ -79,6 +72,33 @@ class Main extends Component {
       console.log(err);
     }
   };
+
+  getMovies = async () => {
+
+    try {
+      // This URL is the path to my remote server
+      const movieUrl = `https://city-explorer-eddie.herokuapp.com/movies?searchQuery=${this.state.searchQuery}`
+      // This URL is the path to my local server
+      //const movieUrl = `http://localhost:3001/movies?searchQuery=${this.state.searchQuery}`
+
+      const movieData = await axios.get(movieUrl);
+
+      // let movieArray = theMovies.data.results.map(movie => {
+      //   return movie;
+      // });
+      this.setState({
+        movieData: movieData,
+        displayMovies: true,
+      });
+    } catch (err) {
+      console.log(err)
+      this.setState({
+        displayMovies: false,
+      })
+    }
+  };
+
+
 
   render() {
     console.log(this.state.weatherData);
@@ -112,26 +132,33 @@ class Main extends Component {
             </Col>
           </Row>
 
-              <Row className="justify-content-md-center">
+          <Row className="justify-content-md-center">
             <Col>
               {this.state.location.place_id &&
                 <img src={this.state.map} alt="Map" />
               }
             </Col>
             <Col>
-            {this.state.weatherData.map(weather => (
-              <Weather weather={weather} />
-              // <p> {weather.date}</p>
-            ))}
+              {this.state.weatherData.map(weather => (
+                <Weather weather={weather} />
+                // <p> {weather.date}</p>
+              ))}
             </Col>
-            </Row>
-            
+            <Card.Body>
+              {this.state.displayMovies ?
+                <Movies data={this.state.movieData} /> :
+                <Error
+                  errorMessage={this.state.errorMessage} />}</Card.Body>
+
+          </Row>
+
           <Col>
-          {
-            this.state.error && <h3>Please enter a city (make sure you're spelling it correctly)</h3>
-          }
+            {
+              this.state.error && <h3>Please enter a city (make sure you're spelling it correctly)</h3>
+            }
           </Col>
-          
+
+
         </Container>
       </>
     )

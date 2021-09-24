@@ -10,7 +10,7 @@ class Footer extends Component {
       <>
         <Navbar bg="dark" variant="dark">
           <Container className="justify-content-md-center">
-            <Navbar.Brand href="#home">
+            <Navbar.Brand href="#">
               Back to the Top
             </Navbar.Brand>
           </Container>
