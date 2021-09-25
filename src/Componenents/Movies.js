@@ -11,7 +11,7 @@ class Movie extends Component {
     return (
 
 
-<CardGroup className='shadow-sm p-3 mb-5 bg-white rounded'>
+<CardGroup className='shadow-sm p-3 mb-5 bg-black rounded' style={{ width: '35rem', marginTop: '5rem'}}>
       <Card className='movieCard'>
       <Card.Body>
         <Card.Title >{this.props.movie.data.original_title}</Card.Title>

@@ -5,7 +5,7 @@ import Weather from './Weather.js'
 import Movies from './Movies.js'
 //import Error from './Error.js'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Form, Button, Container } from 'react-bootstrap';
+import { Form, Button, Card, CardGroup, Container } from 'react-bootstrap';
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
@@ -115,7 +115,7 @@ class Main extends Component {
               </Col>
             </Row>
           </Form>
-
+          {/* 
           <Row className="justify-content-md-center">
             <Col className="align-items-md-center">
               {this.state.location.place_id &&
@@ -129,23 +129,65 @@ class Main extends Component {
             </Col>
           </Row>
 
+
+
           <Row className="justify-content-md-center">
             <Col>
               {this.state.location.place_id &&
                 <img src={this.state.map} alt="Map" />
               }
+            </Col> */}
+
+          <Row className="justify-content-md-center">
+            <Col className="align-items-md-center">
+            <CardGroup className='shadow-sm p-3 mb-5 bg-black rounded' style={{ width: '35rem', marginTop: '5rem'}}>
+              <Card>
+                {this.state.location.place_id &&
+                  <Card.Img variant="top" src={this.state.map} />
+                }
+                <Card.Body>
+                  <Card.Title>  {this.state.location.place_id &&
+                    <h3>{this.state.location.display_name}</h3>
+                  }</Card.Title>
+                  <Card.Text>
+                    {this.state.location.place_id &&
+                      <><p> Latitude: {this.state.location.lat}</p><p> Longitude: {this.state.location.lon}</p></>
+                    }
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+              </CardGroup>
             </Col>
             <Col>
-              {this.state.weatherData.map(weather => (
+              {this.state.weatherData.slice(0, 3).map(weather => (
                 <Weather weather={weather} />
               ))}
             </Col>
+
+
+
             <Col>
-              {this.state.movieData.slice(0, 5).map(movie => (
-                <Movies movie={movie} />
-              ))}
-            </Col>
+            {this.state.movieData.slice(0, 5).map(movie => (
+              <Movies movie={movie} />
+            ))}
+          </Col>
+
+
           </Row>
+
+
+
+
+
+
+
+          {/* <Col>
+            {this.state.weatherData.map(weather => (
+              <Weather weather={weather} />
+            ))}
+          </Col> */}
+
+
           <Col>
             {
               this.state.error && <h3>Please enter a city (make sure you're spelling it correctly)</h3>
