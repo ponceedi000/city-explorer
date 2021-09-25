@@ -16,9 +16,7 @@ class Movie extends Component {
       <Card.Body>
         <Card.Title >{this.props.movie.data.original_title}</Card.Title>
         <Card.Text >
-          {this.props.movie.data.overview}
-          <br></br>
-          
+          {this.props.movie.data.overview}          
         </Card.Text>
       </Card.Body>
       <Card.Img variant="bottom"  src={`https://image.tmdb.org/t/p/original${this.props.movie.data.poster_path}`} height='60%' />

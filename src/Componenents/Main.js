@@ -115,30 +115,16 @@ class Main extends Component {
               </Col>
             </Row>
           </Form>
-          {/* 
+          
+
           <Row className="justify-content-md-center">
-            <Col className="align-items-md-center">
-              {this.state.location.place_id &&
-                <h3>The city is: {this.state.location.display_name}</h3>
-              }
+
+          <Col>
+              {this.state.weatherData.slice(0, 5).map(weather => (
+                <Weather weather={weather} />
+              ))}
             </Col>
-            <Col>
-              {this.state.location.place_id &&
-                <h3> Latitude: {this.state.location.lat}  |  Longitude: {this.state.location.lon}</h3>
-              }
-            </Col>
-          </Row>
 
-
-
-          <Row className="justify-content-md-center">
-            <Col>
-              {this.state.location.place_id &&
-                <img src={this.state.map} alt="Map" />
-              }
-            </Col> */}
-
-          <Row className="justify-content-md-center">
             <Col className="align-items-md-center">
             <CardGroup className='shadow-sm p-3 mb-5 bg-black rounded' style={{ width: '35rem', marginTop: '5rem'}}>
               <Card>
@@ -158,36 +144,13 @@ class Main extends Component {
               </Card>
               </CardGroup>
             </Col>
-            <Col>
-              {this.state.weatherData.slice(0, 3).map(weather => (
-                <Weather weather={weather} />
-              ))}
-            </Col>
-
-
 
             <Col>
             {this.state.movieData.slice(0, 5).map(movie => (
               <Movies movie={movie} />
             ))}
           </Col>
-
-
           </Row>
-
-
-
-
-
-
-
-          {/* <Col>
-            {this.state.weatherData.map(weather => (
-              <Weather weather={weather} />
-            ))}
-          </Col> */}
-
-
           <Col>
             {
               this.state.error && <h3>Please enter a city (make sure you're spelling it correctly)</h3>
