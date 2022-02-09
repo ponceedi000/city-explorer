@@ -7,6 +7,9 @@
 
 - I built a React application that uses the Axios library to make user-initiated requests for data from a thrid-party API.
 
+## **Back-End Repo**: 
+- [https://github.com/ponceedi000/city-explorer](https://github.com/ponceedi000/city-explorer)
+
 ## Getting Started
 
 ![](lab%2006.png)
